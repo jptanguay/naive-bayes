@@ -6,7 +6,7 @@
 
 **Imagine you’re a doctor.** A patient walks in with a fever, a cough, and a headache. You need to diagnose whether they have the flu, a cold, or just allergies. How do you decide? You might think: “Given these symptoms, what’s the most likely disease?”
 
-Naive Bayes works in a similar way. It’s a simple but powerful algorithm for **classification**—the task of assigning a label (like “flu” or “cold”) to an input (like symptoms). The “naive” part comes from its core assumption: **it treats each feature (or symptom) as independent of the others**, even if that’s not always true in reality. This makes calculations much faster and often works surprisingly well, especially with text or high-dimensional data.
+Naive Bayes works in a similar way. It’s a simple but powerful algorithm for classification : the task of assigning a label (like “flu” or “cold”) to an input (like symptoms). The “naive” part comes from its core assumption: **it treats each feature (or symptom) as independent of the others**, even if that’s not always true in reality. This makes calculations much faster and often works surprisingly well, especially with text or high-dimensional data.
 
 ### Why Use Naive Bayes?
 
@@ -36,7 +36,9 @@ $$
 P(Spam∣Free, Win)
 $$
 
-> This is what we are trying to estimate
+> This is what we are trying to estimate.
+
+
 
 **Probability of seeing “free” and “win” in any email.**
 
@@ -45,6 +47,8 @@ P(Free, Win)
 $$
 
 > How to compute it ? This is simply the number of emails that contain the words "free" and "win" divided by the number of all emails. 
+
+
 
 **Probability of seeing “free” and “win” in spam emails.**
 
@@ -55,6 +59,8 @@ $$
 
 > How to compute it ?  This is the number of emails that contain the words "free" and "win" divided by the number of emails that have been classified as "Spam" so far.
 
+
+
 **Overall probability any email is spam.**
 
 $$
@@ -62,6 +68,8 @@ P(Spam)
 $$
 
 > This the number of "spam" divided by the overall number of emails received.
+
+
 
 ### The “Naive” Assumption
 
