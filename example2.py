@@ -1,5 +1,4 @@
 from sklearn.naive_bayes import CategoricalNB
-from sklearn.preprocessing import OrdinalEncoder
 import numpy as np
 
 '''

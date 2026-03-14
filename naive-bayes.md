@@ -151,11 +151,10 @@ predictions = model.predict(new_emails_counts)
 print(f"Predictions: {predictions}") # 1 is Spam, 0 is Not Spam
 ```
 
-Here's another example using a well known dataset.
+Here's another example using a well known dataset. This time, we use the class CategoricalNB; our features are *discrete categories with no inherent order*.
 
 ```python
 from sklearn.naive_bayes import CategoricalNB
-from sklearn.preprocessing import OrdinalEncoder
 import numpy as np
 
 '''
