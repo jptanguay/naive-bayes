@@ -2,7 +2,7 @@
 
 ---
 
-## **Section 1 - What is Naive Bayes?**
+## Section 1 - What is Naive Bayes?
 
 **Imagine you’re a doctor.** A patient walks in with a fever, a cough, and a headache. You need to diagnose whether they have the flu, a cold, or just allergies. How do you decide? You might think: “Given these symptoms, what’s the most likely disease?”
 
@@ -54,7 +54,6 @@ $$
 
 $$
 P(Free, Win∣Spam)
-
 $$
 
 > How to compute it ?  This is the number of emails that contain the words "free" and "win" divided by the number of emails that have been classified as "Spam" so far.
@@ -93,7 +92,13 @@ Naive Bayes comes in different “flavors,” each tailored to a specific type o
 | Multinomial | Discrete counts (e.g., text) | Word frequencies in documents |
 | Bernoulli   | Binary features              | Presence/absence of words     |
 
-The table below shows which Scikit-Learn class is usually prefered based on the **mathematical nature** of their input features X
+---
+
+## 3 - Naive Bayes in Python with scikit-learn
+
+Using Naive Bayes for spam detection is a classic "hello world" of machine learning. It's particularly effective for text because it handles high-dimensional data (like a vocabulary of thousands of words) surprisingly well, even with its "naive" assumption that every word is independent of the others.
+
+The table below shows which Scikit-Learn class is usually preferred based on the **mathematical nature** of their input features X
 
 | **Scikit-Learn Class** | **Feature Type**     | **Mathematical Assumption**                              | **Real-World Example**                                           |
 | ---------------------- | -------------------- | -------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -102,11 +107,6 @@ The table below shows which Scikit-Learn class is usually prefered based on the 
 | **BernoulliNB**        | **Binary / Boolean** | Features are independent "Yes/No" or "1/0" trials.       | Presence/Absence of a specific keyword, "Is the user logged in?" |
 | **CategoricalNB**      | **Categorical**      | Features are discrete categories with no inherent order. | Eye color (Blue, Brown, Green), Job title, Country of origin.    |
 
----
-
-## 3 - Naive Bayes in Python with scikit-learn
-
-Using Naive Bayes for spam detection is a classic "hello world" of machine learning. It's particularly effective for text because it handles high-dimensional data (like a vocabulary of thousands of words) surprisingly well, even with its "naive" assumption that every word is independent of the others.
 
 Here is a short example of a `MultinomialNB` classifier that uses`CountVectorizer`. 
 
@@ -144,14 +144,14 @@ model = MultinomialNB()
 model.fit(X_train, y_train)
 
 # Predict on new data
-new_emails = ["Get a discount on your next purchase!", "Are you home?"]
+new_emails = ["Get a free gift card!", "Are you home?"]
 new_emails_counts = vectorizer.transform(new_emails)
 predictions = model.predict(new_emails_counts)
 
 print(f"Predictions: {predictions}") # 1 is Spam, 0 is Not Spam
 ```
 
-Here's another example using a wll known dataset.
+Here's another example using a well known dataset.
 
 ```python
 from sklearn.naive_bayes import CategoricalNB
@@ -190,9 +190,7 @@ probability = model.predict_proba(new_day)
 
 print(f"Should we play golf? {'Yes' if prediction[0] == 1 else 'No'}")
 print(
-    f"Probabilities: [
-        No: {probability[0][0]:.2f}, Yes: {probability[0][1]:.2f}
-    ]"
+    f"Probabilities: [No: {probability[0][0]:.2f}, Yes: {probability[0][1]:.2f}]"
 )
 ```
 
@@ -228,6 +226,6 @@ The algorithm’s primary weakness is its **Independence Assumption**: it assume
 | **SVM**                 | You need maximum accuracy on text.   | High memory usage; harder to interpret.          |
 | **Random Forest**       | Feature interactions are critical.   | Requires much more data and tuning.              |
 
-> **Takeaway:** Always use Naive Bayes as your **baseline**. It provides a "good enough" solution quickly, allowing you to decide if a more complex model is worth the extra effort.
+> **Takeaway:** Use Naive Bayes as a **baseline**. It provides a "good enough" solution quickly, allowing you to decide if a more complex model is worth the extra effort.
 
 ---
