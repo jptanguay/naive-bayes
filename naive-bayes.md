@@ -24,11 +24,43 @@ Suppose you receive an email with the words “free,” “win,” and “prize.
 
 ### Bayes’ Theorem: The Foundation
 
-At its heart, Naive Bayes is based on **Bayes’ Theorem**, which describes how to update the probability of a hypothesis (e.g., “this email is spam”) as we see more evidence (e.g., words like “free” or “win”).  In this context, the theorem becomes:
+At its heart, Naive Bayes is based on **Bayes’ Theorem**,
+
+$$
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+$$
+
+The following arrangement highlights that Bayes’ Theorem is a dynamic belief update:
+
+$$
+P(A|B) = \frac{P(B|A)}{P(B)} \cdot P(A)
+$$
+
+---
+
+* **$P(A)$ (The Prior): Our baseline belief.**
+  This is a "pure" probability that does not consider any specific conditions, constraints, or new evidence (e.g., the general prevalence of the flu in the entire population, or the proportion of spams among all emails received).
+
+* **$\frac{P(B|A)}{P(B)}$ (The Evidence Ratio): The "Scaling Factor."**
+  This adjusts the baseline based on how the new evidence ($B$) relates to the outcome ($A$):
+  
+  * **Greater than 1:** The evidence is more likely to occur with this outcome than by chance; our confidence increases.
+  
+  * **Equal to 1:** The evidence is neutral; our confidence remains the same.
+  
+  * **Less than 1:**  The evidence is rare for this outcome but common otherwise; our confidence decreases.
+
+---
+
+In this context of our spam example, the equation could be:
 
 $$
 P(\text{Spam} \mid \text{Free, Win}) = \frac{P(\text{Free, Win} \mid \text{Spam}) \cdot P(\text{Spam})}{P(\text{Free, Win})}
 $$
+
+which describes how to update the probability of the hypothesis (e.g., “this email is spam”) as we see more evidence (e.g., words like “free” or “win”). Here's the meaning of differents parts in the equation :
+
+---
 
 **Probability of the email is spam given the words “free” and “win.”**
 
@@ -56,7 +88,7 @@ $$
 P(Free, Win∣Spam)
 $$
 
-> How to compute it ?  This is the number of emails that contain the words "free" and "win" divided by the number of emails that have been classified as "Spam" so far.
+> How to compute it ?  See the comment in the next section **"The Naive Assumption"**.
 
 
 
@@ -70,9 +102,11 @@ $$
 
 
 
+---
+
 ### The “Naive” Assumption
 
-Calculating P(Free, Win∣Spam) directly is complex, especially with many features. Naive Bayes simplifies this by assuming **all features are independent**:
+To simplify the calculation of $P(\text{Free}, \text{Win} \mid \text{Spam})$, Naive Bayes avoids the complexity of analyzing word combinations by **assuming all features are entirely independent**. Under this "naive" assumption, the probability of multiple features occurring together is reduced to a simple product of their individual probabilities:
 
 $$
 P(Free, Win∣Spam)=P(Free∣Spam)⋅P(Win∣Spam)
@@ -106,7 +140,6 @@ The table below shows which Scikit-Learn class is usually preferred based on the
 | **MultinomialNB**      | **Discrete Counts**  | Features represent frequencies or tallies.               | Word counts in a document, number of clicks on a button.         |
 | **BernoulliNB**        | **Binary / Boolean** | Features are independent "Yes/No" or "1/0" trials.       | Presence/Absence of a specific keyword, "Is the user logged in?" |
 | **CategoricalNB**      | **Categorical**      | Features are discrete categories with no inherent order. | Eye color (Blue, Brown, Green), Job title, Country of origin.    |
-
 
 Here is a short example of a `MultinomialNB` classifier that uses`CountVectorizer`. 
 
