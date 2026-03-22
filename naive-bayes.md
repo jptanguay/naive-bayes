@@ -4,9 +4,8 @@
 
 ## Section 1 - What is Naive Bayes?
 
-**Imagine you’re a doctor.** A patient walks in with a fever, a cough, and a headache. You need to diagnose whether they have the flu, a cold, or just allergies. How do you decide? You might think: “Given these symptoms, what’s the most likely disease?”
-
-Naive Bayes works in a similar way. It’s a simple but powerful algorithm for classification : the task of assigning a label (like “flu” or “cold”) to an input (like symptoms). The “naive” part comes from its core assumption: **it treats each feature (or symptom) as independent of the others**, even if that’s not always true in reality. This makes calculations much faster and often works surprisingly well, especially with text or high-dimensional data.
+**Imagine a gardener** who finds that one of its favorite plants in his garden has yellow leaves, wilting stems, and spots on its foliage. To determine whether the plant is suffering from overwatering, a fungal infection, or a nutrient deficiency, he ask himself: “Given these signs, what is the most likely cause?”
+Naive Bayes works in a similar way. It is a simple yet powerful algorithm for classification, i.e. the process of assigning a label (such as “overwatering” or “fungal infection”) to an input (such as plant symptoms). The term “naive” comes from its core assumption: **the algorithm treats each feature (or sign) as independent of the others**, even if they might be related in reality. This simplification makes calculations faster and often produces effective results, especially with text or complex datasets.
 
 ### Why Use Naive Bayes?
 
@@ -55,42 +54,36 @@ $$
 In this context of our spam example, the equation could be:
 
 $$
-P(\text{Spam} \mid \text{Free, Win}) = \frac{P(\text{Free, Win} \mid \text{Spam}) \cdot P(\text{Spam})}{P(\text{Free, Win})}
+P(\text{Spam} \mid \text{Free}) = \frac{P(\text{Free} \mid \text{Spam}) \cdot P(\text{Spam})}{P(\text{Free})}
 $$
 
 which describes how to update the probability of the hypothesis (e.g., “this email is spam”) as we see more evidence (e.g., words like “free” or “win”). Here's the meaning of differents parts in the equation :
 
 ---
 
-**Probability of the email is spam given the words “free” and “win.”**
+**Probability of the email is spam given the words “free”**
 
 $$
-P(Spam∣Free, Win)
+P(Spam∣Free)
 $$
 
 > This is what we are trying to estimate.
 
-
-
-**Probability of seeing “free” and “win” in any email.**
+**Probability of seeing “free” in any email.**
 
 $$
-P(Free, Win)
+P(Free)
 $$
 
-> How to compute it ? This is simply the number of emails that contain the words "free" and "win" divided by the number of all emails. 
+> How to compute it ? This is simply the number of emails that contain the words "free" divided by the number of all emails. 
 
-
-
-**Probability of seeing “free” and “win” in spam emails.**
+**Probability of seeing “free” in spam emails.**
 
 $$
-P(Free, Win∣Spam)
+P(Free ∣ Spam)
 $$
 
-> How to compute it ?  See the comment in the next section **"The Naive Assumption"**.
-
-
+> How to compute it ?  this is the proportion of known spam emails that contain the word "free". In order words, it is the number of spams with the word "free", **divided by** the total number of spams in the mailbox.
 
 **Overall probability any email is spam.**
 
@@ -98,15 +91,13 @@ $$
 P(Spam)
 $$
 
-> This the number of "spam" divided by the overall number of emails received.
-
-
+> This the number of spams divided by the overall number of emails received.
 
 ---
 
 ### The “Naive” Assumption
 
-To simplify the calculation of $P(\text{Free}, \text{Win} \mid \text{Spam})$, Naive Bayes avoids the complexity of analyzing word combinations by **assuming all features are entirely independent**. Under this "naive" assumption, the probability of multiple features occurring together is reduced to a simple product of their individual probabilities:
+With two of more features, the calculation quickly becomes complicated and difficult. To simplify the calculation of $P(\text{Free}, \text{Win} \mid \text{Spam})$, Naive Bayes avoids the complexity of analyzing word combinations by **assuming all features are entirely independent**. Under this "naive" assumption, the probability of multiple features occurring together is reduced to a simple product of their individual probabilities:
 
 $$
 P(Free, Win∣Spam)=P(Free∣Spam)⋅P(Win∣Spam)
@@ -143,7 +134,7 @@ The table below shows which Scikit-Learn class is usually preferred based on the
 
 Here is a short example of a `MultinomialNB` classifier that uses`CountVectorizer`. 
 
-**Note**: *CountVectorizer* turns the sentences into a "Bag of Words." It counts how many times "URGENT" or "lunch" appears, creating a numerical matrix the model can understand.
+**Note**: *CountVectorizer* turns the sentences into a "Bag of Words." For example, it counts how many times "URGENT" or "lunch" appears, creating a numerical matrix the model can understand.
 
 ### Full Code Example
 
