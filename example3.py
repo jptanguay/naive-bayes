@@ -1,5 +1,10 @@
 '''
-	test : preprocessing dataset with different types of data
+	test : 
+        using GaussianNB for a dataset that contains different types of data
+        
+        
+    preprocessing: convert bool columns to int, some other columns to one-hot encoded 
+    
 '''
 
 import pandas as pd
