@@ -1,12 +1,13 @@
 '''
 
 
-example using the iris  datasets   
-    https://www.kaggle.com/datasets/uciml/iris
+classification example using GaussianNB on the iris datasets   
+
+    dataset:
     
-    
-¸
-    Class:  {'Iris-setosa': 0, 'Iris-versicolor': 1, 'Iris-virginica': 2}
+        source: https://www.kaggle.com/datasets/uciml/iris    
+        Class:  {'Iris-setosa': 0, 'Iris-versicolor': 1, 'Iris-virginica': 2}
+        
         
     training
         80/20 split
@@ -74,13 +75,10 @@ clf = GaussianNB()
 clf.fit(X_train, y_train)
 
 
-
 # cross validation - to estimate stability and speed
 from sklearn.model_selection import cross_validate
 cv_results = cross_validate(clf, X_train, y_train, cv=3, scoring=('f1_macro'), return_estimator=True)
 print(f"cv_results: {cv_results}")
-
-
 
 
 # accuracy
@@ -88,7 +86,7 @@ score = clf.score(X_test, y_test)
 print(f"score: {score}")
 
 
-# mislabled
+# mislabeled
 y_pred = clf.predict(X_test)
 print("Number of mislabeled points out of a total %d points : %d" % (X_test.shape[0], (y_test != y_pred).sum()))
       
